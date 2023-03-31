@@ -84,8 +84,8 @@ function restartMatch() {
     computerScore = 0;
     playerScoreParaTag.textContent = "Player: 0";
     computerScoreParaTag.textContent = "Computer: 0";
-    resultOfMatchParaTag.textContent = "";
-    resultOfRoundParaTag.textContent = "";
+    resultOfMatchParaTag.textContent = "Game Result: ";
+    resultOfRoundParaTag.textContent = "Round Result: ";
 }
 
 /* Function to play a whole game with 5 rounds 
