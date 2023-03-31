@@ -1,3 +1,37 @@
+/* Going to set some global variables for UI stuff */
+const buttonRock = document.getElementById('rock');
+const buttonPaper = document.getElementById('paper');
+const buttonScissors = document.getElementById('scissors');
+
+buttonRock.addEventListener('click', () => handleClick('rock'));
+buttonPaper.addEventListener('click', () => handleClick('paper'));
+buttonScissors.addEventListener('click', () => handleClick('scissors'));
+
+let computerScore = 0;
+let playerScore = 0;
+
+function handleClick(playerSelection) {
+
+    let computerSelection = getComputerChoice();
+
+    let roundResult = playRound(playerSelection, computerSelection);
+    console.log(roundResult);
+        if (roundResult.includes("Tie")) {
+            console.log("Nobody gained a point!");
+        } else if (roundResult.includes("Lose")) {
+            computerScore++;
+            console.log("Player Score: " + playerScore);
+            console.log("Computer Score: " + computerScore);
+        } else {
+            playerScore++;
+            console.log("Player Score: " + playerScore);
+            console.log("Computer Score: " + computerScore);        
+        }
+        determineWinner();
+    }
+
+    
+
 /* Function that gets a random choice from the computer */
 function getComputerChoice() {
     let randomMin = Math.ceil(1);
@@ -32,16 +66,26 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-/* Function to play a whole game with 5 rounds */
-function game() {
+function determineWinner(playerScore, computerScore) {
+    if (playerScore == 5) {
+        console.log("You win");
+    } else if (computerScore == 5) {
+        console.log("You lost");
+    }
+}
+
+/* Function to play a whole game with 5 rounds 
+function game(playerSelection) {
     let playerScore = 0;
     let computerScore = 0;
 
     console.log("Playing 5 rounds");
 
     for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Please enter: Rock, Paper, or Scissors");
-        playerSelection.toLowerCase();
+    /*    let playerSelection = prompt("Please enter: Rock, Paper, or Scissors");
+        playerSelection.toLowerCase(); 
+        console.log("Please click a button!");
+
         let computerSelection = getComputerChoice();
 
         let roundResult = playRound(playerSelection, computerSelection);
@@ -67,8 +111,4 @@ function game() {
     } else {
         console.log("You lost! LOL");
     }
-}
-
-game();
-
-
+} */
