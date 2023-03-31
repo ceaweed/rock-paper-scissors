@@ -2,10 +2,16 @@
 const buttonRock = document.getElementById('rock');
 const buttonPaper = document.getElementById('paper');
 const buttonScissors = document.getElementById('scissors');
+const playerScoreParaTag = document.getElementById('playerScore');
+const computerScoreParaTag = document.getElementById('computerScore');
+const resultOfRoundParaTag = document.getElementById('resultOfRound');
+const resultOfMatchParaTag = document.getElementById('resultOfMatch');
+const restartButton = document.getElementById('restart');
 
 buttonRock.addEventListener('click', () => handleClick('rock'));
 buttonPaper.addEventListener('click', () => handleClick('paper'));
 buttonScissors.addEventListener('click', () => handleClick('scissors'));
+restartButton.addEventListener('click', () => restartMatch());
 
 let computerScore = 0;
 let playerScore = 0;
@@ -15,20 +21,27 @@ function handleClick(playerSelection) {
     let computerSelection = getComputerChoice();
 
     let roundResult = playRound(playerSelection, computerSelection);
-    console.log(roundResult);
+    resultOfRoundParaTag.textContent = `Round Result: ${roundResult}`;
         if (roundResult.includes("Tie")) {
-            console.log("Nobody gained a point!");
+
         } else if (roundResult.includes("Lose")) {
             computerScore++;
-            console.log("Player Score: " + playerScore);
-            console.log("Computer Score: " + computerScore);
+            playerScoreParaTag.textContent = `Player: ${playerScore}`;
+            computerScoreParaTag.textContent = `Computer: ${computerScore}`;
         } else {
             playerScore++;
-            console.log("Player Score: " + playerScore);
-            console.log("Computer Score: " + computerScore);        
+            playerScoreParaTag.textContent = `Player: ${playerScore}`;
+            computerScoreParaTag.textContent = `Computer: ${computerScore}`;        
         }
-        determineWinner();
-    }
+        
+        if (computerScore == 5) {
+            resultOfMatchParaTag.textContent = "COMPUTER WINS!";
+            restartMatch();
+        } else if (playerScore == 5){
+            resultOfMatchParaTag.textContent = "PLAYER WINS!";
+            restartMatch();
+        }
+}
 
     
 
@@ -66,12 +79,13 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function determineWinner(playerScore, computerScore) {
-    if (playerScore == 5) {
-        console.log("You win");
-    } else if (computerScore == 5) {
-        console.log("You lost");
-    }
+function restartMatch() {
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreParaTag.textContent = "Player: 0";
+    computerScoreParaTag.textContent = "Computer: 0";
+    resultOfMatchParaTag.textContent = "";
+    resultOfRoundParaTag.textContent = "";
 }
 
 /* Function to play a whole game with 5 rounds 

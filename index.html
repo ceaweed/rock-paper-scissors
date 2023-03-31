@@ -6,9 +6,30 @@
 </head>
 <body>
   <div class="choices">
-    <button id="rock">ROCK</button>
-    <button id="paper">PAPER</button>
-    <button id="scissors">SCISSORS</button>
+    <div class="playerOptions">
+      <button id="rock">ROCK</button>
+      <button id="paper">PAPER</button>
+      <button id="scissors">SCISSORS</button>
+    </div>
+    <div class="restartDiv">
+      <button id="restart">RESTART</button>
+    </div>
+  </div>
+  <div class="scoreboard">
+    <div class="scores">
+      <p class="score" id="playerScore">Player: 0</p>
+    </div>
+    <div class="scores">
+      <p class="score" id="computerScore">Computer: 0</p>
+    </div>
+  </div>
+  <div class="results">
+    <div class="result">
+      <p id="resultOfRound">Round Result: </p>
+    </div>
+    <div class="result">
+      <p id="resultOfMatch">Game Result: </p>
+    </div>
   </div>
   <script src="./game.js"></script>
 </body>
