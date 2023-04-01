@@ -2,6 +2,13 @@ body {
     background-color: lightcyan;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .choices {
     display: flex;
     justify-content: left;
@@ -9,7 +16,7 @@ body {
     gap: 50px;
 }
 
-.choices button {
+/* .choices button {
   background: #FF4742;
   border: 1px solid #FF4742;
   border-radius: 6px;
@@ -43,5 +50,5 @@ body {
 
 .choices button:active {
   opacity: .5;
-}
+} */
 

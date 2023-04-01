@@ -1,49 +1,47 @@
 /* Going to set some global variables for UI stuff */
-const buttonRock = document.getElementById('rock');
-const buttonPaper = document.getElementById('paper');
-const buttonScissors = document.getElementById('scissors');
+const buttonRock = document.querySelector('#rock');
+const buttonPaper = document.querySelector('#paper');
+const buttonScissors = document.querySelector('#scissors');
 const playerScoreParaTag = document.getElementById('playerScore');
 const computerScoreParaTag = document.getElementById('computerScore');
 const resultOfRoundParaTag = document.getElementById('resultOfRound');
 const resultOfMatchParaTag = document.getElementById('resultOfMatch');
 const restartButton = document.getElementById('restart');
 
-buttonRock.addEventListener('click', () => handleClick('rock'));
-buttonPaper.addEventListener('click', () => handleClick('paper'));
-buttonScissors.addEventListener('click', () => handleClick('scissors'));
-restartButton.addEventListener('click', () => restartMatch());
+buttonRock.addEventListener('click', handleClick);
+buttonPaper.addEventListener('click', handleClick);
+buttonScissors.addEventListener('click',  handleClick);
+restartButton.addEventListener('click',() => location.reload());
 
 let computerScore = 0;
 let playerScore = 0;
 
-function handleClick(playerSelection) {
-
+function handleClick(e) {
+    let playerSelection = (e.target.id);
     let computerSelection = getComputerChoice();
 
     let roundResult = playRound(playerSelection, computerSelection);
-    resultOfRoundParaTag.textContent = `Round Result: ${roundResult}`;
+    resultOfRoundParaTag.textContent = `ROUND RESULT OF THE ROUND YOU JUST PLAYED: ${roundResult}`;
         if (roundResult.includes("Tie")) {
 
         } else if (roundResult.includes("Lose")) {
             computerScore++;
-            playerScoreParaTag.textContent = `Player: ${playerScore}`;
-            computerScoreParaTag.textContent = `Computer: ${computerScore}`;
+            playerScoreParaTag.textContent = `PLAYER (THIS IS YOU): ${playerScore}`;
+            computerScoreParaTag.textContent = `COMPUTER (NOT YOU): ${computerScore}`;
         } else {
             playerScore++;
-            playerScoreParaTag.textContent = `Player: ${playerScore}`;
-            computerScoreParaTag.textContent = `Computer: ${computerScore}`;        
+            playerScoreParaTag.textContent = `PLAYER (THIS IS YOU): ${playerScore}`;
+            computerScoreParaTag.textContent = `COMPUTER (NOT YOU): ${computerScore}`;        
         }
         
         if (computerScore == 5) {
-            resultOfMatchParaTag.textContent = "COMPUTER WINS!";
-            restartMatch();
+            resultOfMatchParaTag.textContent = "COMPUTER WINS! PRESS RESTART TO PLAY AGAIN... UNLESS YOU'RE SCARED";
+            disableButtons();
         } else if (playerScore == 5){
-            resultOfMatchParaTag.textContent = "PLAYER WINS!";
-            restartMatch();
+            resultOfMatchParaTag.textContent = "PLAYER WINS! PRESS RESTART TO PLAY AGAIN OR DON'T I DON'T CARE";
+            disableButtons();
         }
 }
-
-    
 
 /* Function that gets a random choice from the computer */
 function getComputerChoice() {
@@ -79,14 +77,23 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+/* Function to disable event Listeners once game is finished */
+function disableButtons() {
+    buttonRock.removeEventListener('click', handleClick);
+    buttonPaper.removeEventListener('click', handleClick);
+    buttonScissors.removeEventListener('click', handleClick);
+}
+
+/* Function to restart match / play again */
 function restartMatch() {
     playerScore = 0;
     computerScore = 0;
-    playerScoreParaTag.textContent = "Player: 0";
-    computerScoreParaTag.textContent = "Computer: 0";
-    resultOfMatchParaTag.textContent = "Game Result: ";
-    resultOfRoundParaTag.textContent = "Round Result: ";
+    playerScoreParaTag.textContent = "PLAYER (THIS IS YOU): 0";
+    computerScoreParaTag.textContent = "COMPUTER (NOT YOU): 0";
+    resultOfMatchParaTag.textContent = "GAME RESULT: ";
+    resultOfRoundParaTag.textContent = "ROUND RESULT OF THE ROUND YOU JUST PLAYED: ";
 }
+
 
 /* Function to play a whole game with 5 rounds 
 function game(playerSelection) {
